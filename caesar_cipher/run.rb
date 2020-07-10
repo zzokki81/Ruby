@@ -11,7 +11,7 @@ while status
     puts 'Your number must be between 0 and 26. Try again..'
   elsif user_input_number.between?(0, 26)
     print 'Encrypted text is : '
-    puts Cipher.new(user_input_number, user_message).encrypt
+    puts Cipher.new(user_input_number).encrypt(user_message)
     status = false
   end
 end

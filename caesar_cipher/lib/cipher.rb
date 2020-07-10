@@ -1,29 +1,28 @@
 class Cipher
-
-  def initialize(rot_key, raw_message)
+  LOW_ALPHABET = ("a".ord.."z".ord)
+  HIGH_ALPHABET = ("A".ord.."Z".ord)
+  ALPHABET_LENGHT = 26
+  def initialize(rot_key)
     @rot_key = rot_key
-    @raw_message = raw_message
   end
-
-  def encrypt
-
+  def encrypt(raw_message)
     encrypted_message = ''
-    @raw_message.each_char do |character|
-      character = character.ord
-      if character.between?(65, 90)
-        character += @rot_key
-        character -= 26 if character > 90
-        encrypted_message << character.chr
-      elsif character.between?(97, 122)
-        character += @rot_key
-        character -= 26 if character > 122
-        encrypted_message << character.chr
+    raw_message.each_char do |character|
+      encrypt_character = character.ord
+      if HIGH_ALPHABET.include?(encrypt_character)
+        encrypt_character +=@rot_key
+        encrypt_character -= ALPHABET_LENGHT if encrypt_character > "Z".ord
+      elsif LOW_ALPHABET.include?(encrypt_character)
+        encrypt_character += @rot_key
+        encrypt_character -= ALPHABET_LENGHT if encrypt_character > "z".ord
       else
-        encrypted_message << character.chr
+        encrypt_character.chr
       end
+      encrypted_message << encrypt_character.chr
     end
     encrypted_message
   end
-
 end
+
+
 
