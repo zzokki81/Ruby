@@ -2,9 +2,15 @@ class Cipher
   LOW_ALPHABET = ("a".ord.."z".ord)
   HIGH_ALPHABET = ("A".ord.."Z".ord)
   ALPHABET_LENGHT = 26
+
   def initialize(rot_key)
-    @rot_key = rot_key
+    if rot_key > ALPHABET_LENGHT || rot_key < 0
+      raise ArgumentError, "Number must be between 0 and 26"
+    else
+      @rot_key = rot_key
+    end
   end
+
   def encrypt(raw_message)
     encrypted_message = ''
     raw_message.each_char do |character|
@@ -23,6 +29,7 @@ class Cipher
     encrypted_message
   end
 end
+
 
 
 
