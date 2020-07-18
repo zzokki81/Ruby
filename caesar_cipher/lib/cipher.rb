@@ -27,13 +27,10 @@ class Cipher
     elsif LOW_ALPHABET.include?(encoded_character)
       encoded_character += @rot_key
       encoded_character -= ALPHABET_LENGHT if encoded_character > "z".ord
-    else
-      encoded_character.chr
     end
     encoded_character.chr
   end
 end
-
 
 
 
