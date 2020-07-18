@@ -4,31 +4,36 @@ class Cipher
   ALPHABET_LENGHT = 26
 
   def initialize(rot_key)
+    @rot_key = rot_key
     if rot_key > ALPHABET_LENGHT || rot_key < 0
       raise ArgumentError, "Number must be between 0 and 26"
-    else
-      @rot_key = rot_key
     end
   end
 
   def encrypt(raw_message)
     encrypted_message = ''
     raw_message.each_char do |character|
-      encrypt_character = character.ord
-      if HIGH_ALPHABET.include?(encrypt_character)
-        encrypt_character +=@rot_key
-        encrypt_character -= ALPHABET_LENGHT if encrypt_character > "Z".ord
-      elsif LOW_ALPHABET.include?(encrypt_character)
-        encrypt_character += @rot_key
-        encrypt_character -= ALPHABET_LENGHT if encrypt_character > "z".ord
-      else
-        encrypt_character.chr
-      end
-      encrypted_message << encrypt_character.chr
+      encrypted_message << encrypt_character(character)
     end
     encrypted_message
   end
+
+  private
+  def encrypt_character(character)
+    encoded_character = character.ord
+    if HIGH_ALPHABET.include?(encoded_character)
+      encoded_character += @rot_key
+      encoded_character -= ALPHABET_LENGHT if encoded_character > "Z".ord
+    elsif LOW_ALPHABET.include?(encoded_character)
+      encoded_character += @rot_key
+      encoded_character -= ALPHABET_LENGHT if encoded_character > "z".ord
+    else
+      encoded_character.chr
+    end
+    encoded_character.chr
+  end
 end
+
 
 
 
