@@ -7,7 +7,7 @@ begin
   user_input_number = gets.chomp.to_i
   result = Cipher.new(user_input_number).encrypt(user_message)
   puts "Encrypted text is : #{result}"
-rescue
-  puts 'Your number must be between 0 and 26. Try again..'
+rescue ArgumentError => error
+  puts error
   retry
 end
